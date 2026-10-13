@@ -1,0 +1,219 @@
+<<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Belegung</title>
+    <link rel="stylesheet" href="style.css"> <!-- Externe CSS-Datei -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            font-size: 11px;
+        }
+        .container {
+            width: 100%;
+            max-width: 800px;
+            padding: 20px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        .tables {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        table {
+            width: 48%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #8d1111;
+            color: white;
+        }
+        h1, h2 {
+            text-align: center;
+            margin: 10px 0;
+        }
+        .checkbox {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Belegung in Klassenstufe 11</h1>
+    <h3>Es müssen mindestens 10 Fächer und <b> mindestens </b> 35 Wochenstunden belegt werden.</h3>
+    <h3>Wer Italienisch als Muttersprache belegt, muss in Klasse 11 auch <b> zusätzlich</b> "Storia" belegen.</h3>
+    
+    <div class="tables">
+        <div>
+            <h2>Pflichtbelegung 9 Fächer</h2>
+            <table>
+                <tr>
+                    <th>Fach</th>
+                    <th>WoStd</th>
+                    <th>Belegung</th>
+                </tr>
+                <tr>
+                    <td>Deutsch</td>
+                    <td>5</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" checked></td>
+                </tr>
+                <tr>
+                    <td>Mathematik</td>
+                    <td>5</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" checked></td>
+                </tr>
+                <tr>
+                    <td>Geschichte</td>
+                    <td>3</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" checked></td>
+                </tr>
+                <tr>
+                    <td>Englisch</td>
+                    <td>4</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" checked></td>
+                </tr>
+                <tr>
+                    <td>1. NaWi</td>
+                    <td>3</td>
+                    <td>
+                        <select id="nawi" onchange="updateNawi1Selection(); updateSum()">
+                            <option value="">Bitte wählen</option>
+                            <option value="Biologie">Biologie</option>
+                            <option value="Physik">Physik</option>
+                            <option value="Chemie">Chemie</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>IaM oder IaF</td>
+                    <td>4</td>
+                    <td>
+                        <select id="iam" onchange="updateIaSelection(); updateSum()">
+                            <option value="">Bitte wählen</option>
+                            <option value="IaM">IaM</option>
+                            <option value="IaF">IaF</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ku oder Musik</td>
+                    <td>2</td>
+                    <td>
+                        <select id="ku" onchange="updateSum()">
+                            <option value="">Bitte wählen</option>
+                            <option value="Kunst">Kunst</option>
+                            <option value="Musik">Musik</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>BiPhi oder Ethik oder Rel</td>
+                    <td>2</td>
+                    <td>
+                        <select id="biphi" onchange="updateSum()">
+                            <option value="">Bitte wählen</option>
+                            <option value="BiPhi">BiPhi</option>
+                            <option value="Ethik">Ethik</option>
+                            <option value="Religion">Religion</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Sport</td>
+                    <td>2</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" checked></td>
+                </tr>
+                <tr>
+                    <th><strong>Pflichtsumme</strong></th>
+                    <th><strong>30</strong></th>
+                    <th><strong id="pflichtsumme">19 Wochenstunden</strong></th>
+                </tr>
+            </table>
+        </div>
+
+        <div>
+            <h2>Wahlbelegung</h2>
+            <table id="wahlbelegung">
+                <tr>
+                    <th>Fach</th>
+                    <th>WoStd</th>
+                    <th>Belegung</th>
+                </tr>
+                <tr>
+                    <td>Französisch</td>
+                    <td>3</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" id="franz" ></td>
+                </tr>
+                <tr>
+                    <td>Latein</td>
+                    <td>3</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" id="latein" ></td>
+                </tr>
+                                <tr>
+                    <td>2. NaWi</td>
+                    <td>3</td>
+                    <td>
+                        <select id="nawi2" onchange="updateNawi2Selection(); updateSum()">
+                            <option value="">Bitte wählen</option>
+                            <option value="Biologie">Biologie</option>
+                            <option value="Physik">Physik</option>
+                            <option value="Chemie">Chemie</option>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Informatik</td>
+                    <td>2</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" id="info" ></td>
+                </tr>
+                <tr>
+                    <td>Economics</td>
+                    <td>2</td>
+                    <td><input type="checkbox" class="checkbox" onclick="updateSum()" id = "eco" ></td>
+                </tr>
+                <tr>
+                    <td>Geographie</td>
+                    <td>2</td>
+                    <td><input type="checkbox"  class="checkbox" onclick="updateSum()" id = "geo"></td>
+                </tr>
+                <tr>
+                    <th><strong>Fächeranzahl</strong></th>
+                    <th><strong></strong></th>
+                    <th><strong id="maxFaecher">5</strong></th>
+                </tr>
+                <tr>
+                    <th><strong>Wochenstunden ohne GIT</strong></th>
+                    <th><strong></strong></th>
+                    <th><strong id="minWochenstunden">19</strong></th>
+                </tr>
+                <tr>
+                    <td>GIT (Pflicht bei Auswahl von IAM)</td>
+                    <td>2</td>
+                    <td><input type="checkbox" class="checkbox" id="gitCheckbox" onclick="updateSum()" disabled></td>
+                </tr>
+            </table>
+
+            <input type="text" id="myText" placeholder="Dateiname eingeben">
+            <button onclick="exportToFile()">Exportieren</button>
+
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script> <!-- Externe JavaScript-Datei -->
+
+
+</body>
+</html>
